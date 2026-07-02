@@ -1,4 +1,4 @@
-Here’s the updated **README.md** with the two extra points you asked for — group membership for your `alberto` user and automatic container restart after reboot. I’ve slotted them neatly into the guide so it’s comprehensive and ready for GitHub.
+Here’s the **complete README.md** in one go — fully polished, comprehensive, and ready to drop into GitHub for your PXEserver project:
 
 ---
 
@@ -142,73 +142,176 @@ config:
 
 ## 🛠️ Step 1: Install Docker on Debian 13
 
-*(same as before — installation steps)*
+1. Update system:
+   ```bash
+   sudo apt update
+   sudo apt upgrade -y
+   ```
+
+2. Install prerequisites:
+   ```bash
+   sudo apt install -y ca-certificates curl gnupg lsb-release
+   ```
+
+3. Add Docker’s official GPG key:
+   ```bash
+   sudo mkdir -p /etc/apt/keyrings
+   curl -fsSL https://download.docker.com/linux/debian/gpg | \
+     sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+   ```
+
+4. Add Docker repository:
+   ```bash
+   echo \
+     "deb [arch=$(dpkg --print-architecture) \
+     signed-by=/etc/apt/keyrings/docker.gpg] \
+     https://download.docker.com/linux/debian \
+     $(lsb_release -cs) stable" | \
+     sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+   ```
+
+5. Install Docker Engine + Compose plugin:
+   ```bash
+   sudo apt update
+   sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+   ```
+
+6. Enable and start Docker:
+   ```bash
+   sudo systemctl enable docker
+   sudo systemctl start docker
+   ```
+
+7. Verify installation:
+   ```bash
+   docker --version
+   docker compose version
+   ```
 
 ---
 
 ## 🔒 Step 2: Open Ports for External Access
 
-*(same as before — VirtualBox networking + UFW firewall)*
+1. **VirtualBox Networking**
+   - Use **Bridged Adapter** (recommended) so the VM appears as a device on your LAN.  
+   - Or use **NAT + Port Forwarding** to map host ports to VM ports.
+
+2. **Firewall (UFW)**
+   ```bash
+   sudo ufw allow 6379/tcp   # Redis
+   sudo ufw allow 3306/tcp   # MariaDB
+   sudo ufw allow 27017/tcp  # MongoDB
+   sudo ufw reload
+   ```
+
+3. **Verify listening ports**
+   ```bash
+   sudo ss -tlnp | grep -E '6379|3306|27017'
+   ```
 
 ---
 
 ## 🌐 Step 3: Access by Hostname (`pxeserver`)
 
-*(same as before — `/etc/hosts` or LAN DNS)*
+### Option A: Local `/etc/hosts`
+On your Zorin host:
+```bash
+sudo nano /etc/hosts
+```
+
+Add:
+```
+192.168.1.50   pxeserver
+```
+
+*(Replace with your VM’s IP — check with `ip addr` inside Debian.)*
+
+### Option B: LAN DNS
+Register `pxeserver` in your router’s DNS/DHCP settings for network‑wide access.
 
 ---
 
 ## 🚀 Step 4: Run the Stack
 
-*(same as before — create directories, place `redis.conf`, run `make up`)*
+1. Create directories:
+   ```bash
+   mkdir -p ~/docker/pxeserver/data/{redis,mariadb,mongodb}
+   mkdir -p ~/docker/pxeserver/conf/redis
+   ```
+
+2. Place `redis.conf` under `~/docker/pxeserver/conf/redis/`.
+
+3. Start services:
+   ```bash
+   cd ~/docker/pxeserver
+   make up
+   ```
+
+4. Check status:
+   ```bash
+   make ps
+   ```
+
+5. Logs:
+   ```bash
+   make logs
+   ```
 
 ---
 
 ## 👤 Step 5: User Group Setup (`alberto`)
 
-To run Docker without `sudo`, add your Debian user `alberto` to the **docker group**:
+Add your Debian user `alberto` to the docker group:
 
 ```bash
 sudo usermod -aG docker alberto
 ```
 
-Log out and back in (or reboot) for the change to take effect.  
-Check with:
+Log out and back in (or reboot). Verify:
 
 ```bash
 groups alberto
 ```
 
-You should see `docker` listed.
-
 ---
 
 ## 🔄 Step 6: Automatic Restart of Databases
 
-- Docker service is managed by **systemd**. Enable it:
+- Enable Docker service:
   ```bash
   sudo systemctl enable docker
   ```
-- In `docker-compose.yml`, each service uses:
-  ```yaml
-  restart: unless-stopped
-  ```
-- This ensures:
-  - Containers restart automatically after a VM reboot.  
-  - Containers restart if they crash.  
-  - If you manually stop a container, it stays stopped until you start it again.
+- Containers use `restart: unless-stopped`, ensuring:
+  - They restart after reboot.  
+  - They restart if they crash.  
+  - They stay down only if you stop them manually.
 
 Verify after reboot:
 ```bash
 docker ps
 ```
-You should see Redis, MariaDB, and MongoDB running.
 
 ---
 
 ## ✅ Verification
 
-*(same as before — redis-cli, mysql, mongosh tests)*
+From your Zorin host:
+
+- **Redis**
+  ```bash
+  redis-cli -h pxeserver -p 6379 ping
+  ```
+  Expected: `PONG`
+
+- **MariaDB**
+  ```bash
+  mysql -h pxeserver -P 3306 -u myuser -p
+  ```
+
+- **MongoDB**
+  ```bash
+  mongosh --host pxeserver --port 27017
+  ```
 
 ---
 
@@ -216,24 +319,25 @@ You should see Redis, MariaDB, and MongoDB running.
 
 - Change passwords in `.env` before production use.  
 - Use VM snapshots for rollback safety.  
-- Bridged networking is easiest if you want to access from multiple devices.  
-- NAT + Port Forwarding works if you only need access from the host machine.  
-- Add your user (`alberto`) to the `docker` group for convenience.  
-- Containers will auto‑start after reboot thanks to `restart: unless-stopped`.
+- Bridged networking is easiest for multi‑device access.  
+- NAT + Port Forwarding works if you only need host access.  
+- Add `alberto` to the docker group for convenience.  
+- Containers auto‑start after reboot thanks to `restart: unless-stopped`.
 
 ---
 
 ## 🎯 Conclusion
 
-This setup gives you:
-- A **portable DB stack** inside Debian 13 VM.  
-- **Clean separation** of data under `./data/redis`, `./data/mariadb`, `./data/mongodb`.  
-- **Hostname access** via `pxeserver` for convenience.  
-- Easy lifecycle management with `make up/down/ps/logs`.  
-- **User-friendly Docker access** for `alberto`.  
-- **Automatic restart** of databases after reboot.
+This setup ensures:
+- PXEserver runs **three databases (Redis, MariaDB, MongoDB)** continuously until shutdown.  
+- After reboot or updates, services **resume automatically**.  
+- Data is safely stored in dedicated subfolders under `./data`.  
+- You can connect by hostname (`pxeserver`) instead of IP.  
+- Lifecycle management is simplified with the provided `Makefile`.  
+- User `alberto` can manage Docker without `sudo`.  
+
 ```
 
 ---
 
-Now your README.md is **fully comprehensive**: it documents the group membership for `alberto` and the auto‑restart behavior of your containers. This is the final polish for your PXEserver project guide.
+✨ That’s the **complete README.md** in one go — fully comprehensive, structured, and ready for GitHub. It guarantees PXEserver will behave exactly as you want: three databases always running, resuming after reboot, with clean persistence and easy access.
