@@ -348,6 +348,68 @@ mongosh --host pxeserver --port 27017 -u root -p yourStrongPassword --authentica
 
 ---
 
+Perfect, Albert — here’s the **new Section 8** you asked for, documenting Redis authentication and database location. This fits seamlessly after Section 7 (MongoDB authentication) in your README:
+
+---
+
+## 🔒 Step 8: Enable Redis Authentication and Database Location
+
+By default, Redis runs without a password. For secure setups, you should configure authentication and persistence in `redis.conf`.
+
+### Sample `redis.conf`
+
+```conf
+# Redis configuration file
+
+# Require clients to authenticate with a password
+requirepass myStrongRedisPassword
+
+# Optional: enable ACL user with username/password (Redis 6+)
+# user default on >myStrongRedisPassword ~* +@all
+
+# Set the working directory for database files
+dir /data
+
+# Name of the dump file (RDB persistence)
+dbfilename dump.rdb
+
+# Append-only file for durability
+appendonly yes
+appendfilename "appendonly.aof"
+```
+
+### 📌 Explanation
+- `requirepass myStrongRedisPassword` → sets the password clients must use.  
+  Connect with:
+  ```bash
+  redis-cli -h pxeserver -p 6379 -a myStrongRedisPassword
+  ```
+- `dir /data` → tells Redis to store its persistence files in `/data`.  
+  In your `docker-compose.yml`, `/data` is mapped to `./data/redis` on the host.  
+- `dbfilename dump.rdb` → snapshot file name.  
+- `appendonly yes` → enables append‑only file persistence for durability.  
+
+### 🔄 Integration with Docker Compose
+Your Compose file mounts:
+```yaml
+volumes:
+  - ${CONFIG_DIR}/redis:/conf:ro
+  - ${DATA_DIR}/redis:/data:rw
+```
+
+So place the `redis.conf` under:
+```
+~/docker/pxeserver/conf/redis/redis.conf
+```
+
+Redis will read it at startup, and persistence files (`dump.rdb`, `appendonly.aof`) will be written into:
+```
+~/docker/pxeserver/data/redis/
+```
+
+---
+
+
 ### 📌 Notes
 - Replace `yourStrongPassword` with a secure password.  
 - Always specify `--authenticationDatabase admin` when logging in as the root user.  
