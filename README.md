@@ -293,6 +293,69 @@ docker ps
 
 ---
 
+Got it, Albert — let’s add a proper **MongoDB Enable Section** to the README so you have both the default (no auth) and secure (auth enabled) options documented. Here’s how it fits in:
+
+---
+
+## 🔑 Step 7: Enable MongoDB Authentication (Optional)
+
+By default, the MongoDB container runs **without authentication**. This is fine for local testing, but for production‑like use you should enable a username and password.
+
+### Option A: Default (no authentication)
+With the current `docker-compose.yml`:
+```yaml
+mongodb:
+  image: ${MONGODB_IMAGE}
+  container_name: mongodb
+  ports:
+    - "27017:27017"
+  volumes:
+    - ${DATA_DIR}/mongodb:/data/db:rw
+  restart: unless-stopped
+```
+
+You can connect directly:
+```bash
+mongosh --host pxeserver --port 27017
+```
+
+No credentials are required.
+
+---
+
+### Option B: Secure (authentication enabled)
+Add environment variables to the MongoDB service:
+
+```yaml
+mongodb:
+  image: ${MONGODB_IMAGE}
+  container_name: mongodb
+  ports:
+    - "27017:27017"
+  environment:
+    MONGO_INITDB_ROOT_USERNAME: root
+    MONGO_INITDB_ROOT_PASSWORD: yourStrongPassword
+  volumes:
+    - ${DATA_DIR}/mongodb:/data/db:rw
+  restart: unless-stopped
+```
+
+This creates a root user with the specified password. Connect using:
+
+```bash
+mongosh --host pxeserver --port 27017 -u root -p yourStrongPassword --authenticationDatabase admin
+```
+
+---
+
+### 📌 Notes
+- Replace `yourStrongPassword` with a secure password.  
+- Always specify `--authenticationDatabase admin` when logging in as the root user.  
+- You can later create application‑specific users with limited roles inside MongoDB for better security.
+
+---
+
+
 ## ✅ Verification
 
 From your Zorin host:
