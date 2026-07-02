@@ -1,0 +1,8 @@
+# Images
+REDIS_IMAGE=redis:7
+MARIADB_IMAGE=mariadb:11
+MONGODB_IMAGE=mongo:6
+
+# Directories
+DATA_DIR=./data
+CONFIG_DIR=./conf
