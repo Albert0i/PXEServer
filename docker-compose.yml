@@ -16,7 +16,7 @@ services:
     image: ${MARIADB_IMAGE}
     container_name: mariadb
     environment:
-      MYSQL_ROOT_PASSWORD: secretpassword   # change this!
+      MYSQL_ROOT_PASSWORD: 7aStgp6OCwAHTNXBp1MGRxh0XgXFjoFcQZDSeVG5KKs=   # change this!
       MYSQL_DATABASE: mydb
       MYSQL_USER: myuser
       MYSQL_PASSWORD: mypassword
