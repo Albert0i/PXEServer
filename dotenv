@@ -1,8 +1,16 @@
+#
 # Images
-REDIS_IMAGE=redis:7
-MARIADB_IMAGE=mariadb:11
-MONGODB_IMAGE=mongo:6
+#
+REDIS_IMAGE=redis:8.8.0
+MARIADB_IMAGE=mariadb:11.7.2
+MONGODB_IMAGE=mongo:8.2
 
+#
 # Directories
+#
 DATA_DIR=./data
 CONFIG_DIR=./conf
+
+#
+# EOF (2026/07/04)
+#
