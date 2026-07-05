@@ -466,3 +466,9 @@ This setup ensures:
 ---
 
 ✨ That’s the **complete README.md** in one go — fully comprehensive, structured, and ready for GitHub. It guarantees PXEserver will behave exactly as you want: three databases always running, resuming after reboot, with clean persistence and easy access.
+
+---
+
+1. 64位元Debian Linux作業系統實務-Trixie版, 李博明編著
+https://eshop.tsanghai.com.tw/products/cs0464
+
