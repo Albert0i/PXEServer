@@ -799,3 +799,38 @@ Would you like to move forward with configuring the .env file to launch this Doc
 1. 64位元Debian Linux作業系統實務-Trixie版, 李博明編著
 https://eshop.tsanghai.com.tw/products/cs0464
 
+
+---
+
+246.
+"To see all the things that happen to us as accidents or incidents from
+a novel, which we read not with our eyes but with life. Only with
+this attitude can we overcome the mischief of each day and the
+fickleness of events."
+
+"Considerar todas as coisas que nos sucedem’ como acidentes ou episódios de um romance, a que assistimos não com a atenção senão com a vida. Só com essa atitude poderemos vencer a malícia dos dias e os caprichos dos sucessos."
+
+
+238. 
+"There is no sure prize for virtue, and no sure punishment for sin.
+Nor would it be right for such prizes and punishments to exist."
+
+"Nenhum prémio certo tem a virtude, nenhum castigo certo o pecado. Nem seria justo que houvesse tal prémio ou tal castigo."
+
+189. 
+RAINY DAY
+"The air is a veiled yellow, like a pale yellow seen through a dirty
+white. There’s scarcely any yellow in the grey air, but the paleness
+of the grey has a yellow in its sadness"
+
+Dia de chuva
+"O ar é de um amarelo escondido’, como um amarelo pálido visto através de um branco sujo. Mal há amarelo no ar acinzentado. A palidez do cinzento, porém, tem um amarelo na sua tristeza."
+
+---
+
+the ancient Greek mathematician Archimedes famously said: "Give me a place to stand and a lever long enough, and I will move the Earth". 
+
+---
+
+Everything has a reason, right? Why is it called "PXE Server"? What does "PXE" stand for?
+
