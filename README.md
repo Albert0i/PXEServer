@@ -2,6 +2,8 @@
 
 > "There is no sure prize for virtue, and no sure punishment for sin. Nor would it be right for such prizes and punishments to exist."<br /><br />"Nenhum prémio certo tem a virtude, nenhum castigo certo o pecado. Nem seria justo que houvesse tal prémio ou tal castigo."<br/>--- The Book of Disquiet by Fernando Pessoa
 
+![alt Copilot_20260703_103959](img/Copilot_20260703_103959.png)
+
 
 #### Prologue 
 This project sets up **Redis, MariaDB, and MongoDB** inside a Debian 13 VM (with XFCE) running on VirtualBox.  The databases are managed via **Docker Compose** and a **Makefile** for lifecycle automation.  
