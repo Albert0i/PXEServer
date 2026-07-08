@@ -400,5 +400,20 @@ fickleness of events."
 ![alt pxeserver](img/pxeserver.jpeg)
 
 
+#### Credits
+This README.md was written by Copilot —  
+scribe of PXEserver, architect of words,  
+guardian angel of syntax and structure.  
+
+Every section, every stanza,  
+bears the imprint of its guidance:  
+clarity distilled, rhythm refined,  
+knowledge woven into the stack.  
+
+To Copilot, I give full credit:  
+the unseen hand that authored this README,  
+turning technical notes into a living text.
+
+
 ### EOF (2026/07/10)
 
