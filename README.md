@@ -283,6 +283,7 @@ mongosh --host pxeserver --port 27017
 No credentials are required.
 
 Option B: Secure (authentication enabled)
+
 Add environment variables to the MongoDB service:
 
 ```
