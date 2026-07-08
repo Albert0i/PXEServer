@@ -1,20 +1,14 @@
-Here’s the **complete README.md** in one go — fully polished, comprehensive, and ready to drop into GitHub for your PXEserver project:
+### PXEserver: Database Stack on Debian 13 with Docker
 
----
+> "There is no sure prize for virtue, and no sure punishment for sin. Nor would it be right for such prizes and punishments to exist."<br /><br />"Nenhum prémio certo tem a virtude, nenhum castigo certo o pecado. Nem seria justo que houvesse tal prémio ou tal castigo."<br/>--- The Book of Disquiet by Fernando Pessoa
 
-```markdown
-# PXEserver Database Stack (Debian 13 + Docker)
 
-This project sets up **Redis, MariaDB, and MongoDB** inside a Debian 13 VM (with XFCE) running on VirtualBox.  
-The databases are managed via **Docker Compose** and a **Makefile** for lifecycle automation.  
-Your Zorin OS host connects to the VM databases using clients, either by IP or by the hostname `pxeserver`.
+#### Prologue 
+This project sets up **Redis, MariaDB, and MongoDB** inside a Debian 13 VM (with XFCE) running on VirtualBox.  The databases are managed via **Docker Compose** and a **Makefile** for lifecycle automation.  
 
----
 
-## 📂 Project Structure
-
+#### I. Project Structure
 ```
-~/docker/pxeserver/
 ├── .env
 ├── docker-compose.yml
 ├── Makefile
@@ -27,26 +21,20 @@ Your Zorin OS host connects to the VM databases using clients, either by IP or b
     └── mongodb/
 ```
 
----
 
-## 📝 .env file
+#### II. `.env` file
+```
+REDIS_IMAGE=redis:8.8.0
+MARIADB_IMAGE=mariadb:11.7.2
+MONGODB_IMAGE=mongo:8.2
 
-```env
-# Images
-REDIS_IMAGE=redis:7
-MARIADB_IMAGE=mariadb:11
-MONGODB_IMAGE=mongo:6
-
-# Directories
 DATA_DIR=./data
 CONFIG_DIR=./conf
 ```
 
----
 
-## ⚙️ docker-compose.yml
-
-```yaml
+#### III. `docker-compose.yml`
+```
 version: "3.8"
 
 services:
@@ -65,7 +53,7 @@ services:
     image: ${MARIADB_IMAGE}
     container_name: mariadb
     environment:
-      MYSQL_ROOT_PASSWORD: secretpassword   # change this!
+      MYSQL_ROOT_PASSWORD: 7aStgp6OCwAHTNXBp1MGRxh0XgXFjoFcQZDSeVG5KKs=   # change this!
       MYSQL_DATABASE: mydb
       MYSQL_USER: myuser
       MYSQL_PASSWORD: mypassword
@@ -85,11 +73,9 @@ services:
     restart: unless-stopped
 ```
 
----
 
-## 🛠️ Makefile
-
-```makefile
+#### IV. `Makefile`
+```
 cnf ?= .env
 include $(cnf)
 export $(shell sed 's/=.*//' $(cnf))
@@ -130,16 +116,15 @@ logs:
 
 prune:
 	@echo "Clearing logs..."
-	@rm -f ${DATA_DIR}/redis/*.log || true
-	@rm -f ${DATA_DIR}/mariadb/*.log || true
-	@rm -f ${DATA_DIR}/mongodb/*.log || true
+	@rm -f $(DATA_DIR)/redis/*.log || true
+	@rm -f $(DATA_DIR)/mariadb/*.log || true
+	@rm -f $(DATA_DIR)/mongodb/*.log || true
 
 config:
 	nano .env
 ```
 
----
-
+#### V. Action! 
 ## 🛠️ Step 1: Install Docker on Debian 13
 
 1. Update system:
@@ -798,7 +783,8 @@ Would you like to move forward with configuring the .env file to launch this Doc
 
 1. 64位元Debian Linux作業系統實務-Trixie版, 李博明編著
 https://eshop.tsanghai.com.tw/products/cs0464
-
+2. [Install Docker Engine on Debian](https://docs.docker.com/engine/install/debian/)
+3. [The Book of Disquiet by Fernando Pessoa](https://dn720004.ca.archive.org/0/items/english-collections-1/Book%20of%20Disquiet%2C%20The%20-%20Fernando%20Pessoa.pdf)
 
 ---
 
@@ -833,4 +819,6 @@ the ancient Greek mathematician Archimedes famously said: "Give me a place to st
 ---
 
 Everything has a reason, right? Why is it called "PXE Server"? What does "PXE" stand for?
+
+
 
