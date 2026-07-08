@@ -386,6 +386,8 @@ https://eshop.tsanghai.com.tw/products/cs0464
 
 
 #### Epilogue 
+Everything has a reason, right? Why "PXE Server" and what does "PXE" stand for?
+
 > "To see all the things that happen to us as accidents or incidents from
 a novel, which we read not with our eyes but with life. Only with
 this attitude can we overcome the mischief of each day and the
@@ -393,10 +395,8 @@ fickleness of events."
 
 > "Considerar todas as coisas que nos sucedem’ como acidentes ou episódios de um romance, a que assistimos não com a atenção senão com a vida. Só com essa atitude poderemos vencer a malícia dos dias e os caprichos dos sucessos."
 
-Everything has a reason, right? Why "PXE Server" and what does "PXE" stand for?
-
 ![alt pxeserver](img/pxeserver.jpeg)
 
 
-### EOF (2026/07/17)
+### EOF (2026/07/10)
 
