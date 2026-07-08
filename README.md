@@ -2,7 +2,7 @@
 
 > "There is no sure prize for virtue, and no sure punishment for sin. Nor would it be right for such prizes and punishments to exist."<br /><br />"Nenhum prémio certo tem a virtude, nenhum castigo certo o pecado. Nem seria justo que houvesse tal prémio ou tal castigo."<br/>--- The Book of Disquiet by Fernando Pessoa
 
-![alt PXEServer-Desktop](img/PXEServer-Desktop.png)
+![alt PXE Server Wallpaper](img/Copilot_20260703_103959.png)
 
 
 #### Prologue 
