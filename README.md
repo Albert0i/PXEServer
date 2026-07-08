@@ -379,8 +379,7 @@ This setup ensures:
 
 
 #### VII. Bibliography 
-1. 64位元Debian Linux作業系統實務-Trixie版, 李博明編著
-https://eshop.tsanghai.com.tw/products/cs0464
+1. [64位元Debian Linux作業系統實務-Trixie版, 李博明編著](https://eshop.tsanghai.com.tw/products/cs0464)
 2. [Install Docker Engine on Debian](https://docs.docker.com/engine/install/debian/)
 3. [The Book of Disquiet by Fernando Pessoa](https://dn720004.ca.archive.org/0/items/english-collections-1/Book%20of%20Disquiet%2C%20The%20-%20Fernando%20Pessoa.pdf)
 
