@@ -31,6 +31,9 @@ services:
     container_name: mongodb
     ports:
       - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 7aStgp6OCwAHTNXBp1MGRxh0XgXFjoFcQZDSeVG5KKs=
     volumes:
       - ${DATA_DIR}/mongodb:/data/db:rw
     restart: unless-stopped
