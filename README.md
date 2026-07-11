@@ -308,6 +308,25 @@ This creates a root user with the specified password. Connect using:
 mongosh --host pxeserver --port 27017 -u root -p yourStrongPassword --authenticationDatabase admin
 ```
 
+**Caveat: MongoDB only sets your password once on the very first boot.**
+
+If you ran your Docker containers before you put the username and password into your `docker-compose.yml` files, MongoDB initialized a completely blank database layout with **no password tracking at all**. Even if you update the file later, MongoDB safely ignores it on subsequent restarts because it sees the data folder is no longer
+```
+# Bring down the containers and strip out old volume states
+make down 
+
+# Clear out the physical directories on your host file tree
+sudo rm -rf data/mongodb
+
+# Start the containers
+make up
+```
+
+Go back to MongoDB Compass, click New Connection, and use this clean connection string format:
+```
+mongodb://root:7aStgp6OCwAHTNXBp1MGRxh0XgXFjoFcQZDSeVG5KKs%3D@127.0.0.1:27017/?authSource=admin
+```
+
 Step 8: Enable Redis Authentication and Database Location
 
 By default, Redis runs without a password. For secure setups, you should configure authentication and persistence in `redis.conf`.
