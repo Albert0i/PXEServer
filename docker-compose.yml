@@ -37,3 +37,74 @@ services:
     volumes:
       - ${DATA_DIR}/mongodb:/data/db:rw
     restart: unless-stopped
+
+
+#
+# --- New Monitoring Containers ---
+#
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    restart: unless-stopped
+    volumes:
+      - prometheus_data:/prometheus
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "9090:9090"
+#
+# http://localhost:9090/targets
+#      
+
+#
+# Create a local data folder to persist Grafana data!
+# cd data
+# mkdir -p ./grafana_data
+# sudo chmod -R 777 ./grafana_data
+# 
+  grafana:
+    image: grafana/grafana-oss:latest
+    container_name: grafana
+    user: "0"
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - ${DATA_DIR}/grafana_data:/var/lib/grafana
+#
+# http://localhost:3000/
+#
+
+  redis-exporter:
+    image: oliver006/redis_exporter:latest
+    container_name: redis-exporter
+    environment:
+      - REDIS_ADDR=redis://redis:6379
+      - REDIS_PASSWORD=7aStgp6OCwAHTNXBp1MGRxh0XgXFjoFcQZDSeVG5KKs=  # <-- Add your Redis password here
+    restart: unless-stopped
+
+  mongodb-exporter:
+    image: percona/mongodb_exporter:0.49
+    container_name: mongodb-exporter
+    command: 
+      - '--compatible-mode'
+      - '--collect-all'
+    environment:
+      - MONGODB_URI=mongodb://root:7aStgp6OCwAHTNXBp1MGRxh0XgXFjoFcQZDSeVG5KKs=@mongodb:27017
+    restart: unless-stopped
+
+  mariadb-exporter:
+    image: prom/mysqld-exporter:latest
+    container_name: mariadb-exporter
+    environment:
+      # Pass the password securely through the newly required environment format
+      - MYSQLD_EXPORTER_PASSWORD=7aStgp6OCwAHTNXBp1MGRxh0XgXFjoFcQZDSeVG5KKs=
+    command:
+      - '--mysqld.address=mariadb:3306'
+      - '--mysqld.username=root'
+    restart: unless-stopped
+
+
+volumes:
+  prometheus_data:
+  grafana_data:
+  
