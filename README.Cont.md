@@ -37,6 +37,17 @@ Prometheus is the beating heart of this stack. It’s an open‑source monitorin
 Without Prometheus, you’d have no central repository for metrics. Each exporter would expose data, but there’d be no system to collect, store, and analyze it. Prometheus solves this by acting as the hub.
 
 ##### In `docker-compose.yml` file
+```
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    restart: unless-stopped
+    volumes:
+      - prometheus_data:/prometheus
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "9090:9090"
+```
 - Runs on port `9090`, accessible via `http://localhost:9090`.
 - Mounts `prometheus.yml` for configuration, which defines scrape targets (like Redis exporter).
 - Stores data in a persistent volume (`prometheus_data`).
