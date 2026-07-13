@@ -67,18 +67,18 @@ services:
   # Note: 
   # Create a local data folder to persist Grafana data!
   # mkdir -p ./data/grafana_data
-  # sudo chown -R 472:472 ./data/grafana_data
+  # sudo chown -R 777 ./data/grafana_data
   grafana:
     image: grafana/grafana-oss:latest
     container_name: grafana
-    user: "472"   # safer than root ("0")
+    user: "0"   # safer if use "472"... but won't work!
     restart: unless-stopped
     ports:
       - "80:3000"
     volumes:
       - ${DATA_DIR}/grafana_data:/var/lib/grafana
   #
-  # http://localhost:30/
+  # http://localhost:80/
   #
 
   # Redis metrics exporter

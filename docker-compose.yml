@@ -1,6 +1,11 @@
 version: "3.8"
 
 services:
+
+##################################
+#    Core Database Containers    #
+##################################
+  # Redis in-memory key-value store
   redis:
     image: ${REDIS_IMAGE}
     container_name: redis
@@ -12,11 +17,12 @@ services:
       - ${DATA_DIR}/redis:/data:rw
     restart: unless-stopped
 
+  # MariaDB relational database
   mariadb:
     image: ${MARIADB_IMAGE}
     container_name: mariadb
     environment:
-      MYSQL_ROOT_PASSWORD: 7aStgp6OCwAHTNXBp1MGRxh0XgXFjoFcQZDSeVG5KKs=   # change this!
+      MYSQL_ROOT_PASSWORD: ${ROOT_PASSWORD}
       MYSQL_DATABASE: mydb
       MYSQL_USER: myuser
       MYSQL_PASSWORD: mypassword
@@ -26,6 +32,7 @@ services:
       - ${DATA_DIR}/mariadb:/var/lib/mysql:rw
     restart: unless-stopped
 
+  # MongoDB document database  
   mongodb:
     image: ${MONGODB_IMAGE}
     container_name: mongodb
@@ -33,15 +40,16 @@ services:
       - "27017:27017"
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: 7aStgp6OCwAHTNXBp1MGRxh0XgXFjoFcQZDSeVG5KKs=
+      MONGO_INITDB_ROOT_PASSWORD: ${ROOT_PASSWORD}
     volumes:
       - ${DATA_DIR}/mongodb:/data/db:rw
     restart: unless-stopped
 
 
-#
-# --- New Monitoring Containers ---
-#
+###############################
+#    Monitoring Containers    #
+###############################
+  # Prometheus metrics collector
   prometheus:
     image: prom/prometheus:latest
     container_name: prometheus
@@ -51,37 +59,38 @@ services:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
     ports:
       - "9090:9090"
-#
-# http://localhost:9090/targets
-#      
+  #
+  # http://localhost:9090/targets
+  #      
 
-#
-# Create a local data folder to persist Grafana data!
-# cd data
-# mkdir -p ./grafana_data
-# sudo chmod -R 777 ./grafana_data
-# 
+  # Grafana visualization dashboard
+  # Note: 
+  # Create a local data folder to persist Grafana data!
+  # mkdir -p ./data/grafana_data
+  # sudo chown -R 777 ./data/grafana_data
   grafana:
     image: grafana/grafana-oss:latest
     container_name: grafana
-    user: "0"
+    user: "0"   # safer if use "472"... but won't work!
     restart: unless-stopped
     ports:
       - "80:3000"
     volumes:
       - ${DATA_DIR}/grafana_data:/var/lib/grafana
-#
-# http://localhost:3000/
-#
+  #
+  # http://localhost:80/
+  #
 
+  # Redis metrics exporter
   redis-exporter:
     image: oliver006/redis_exporter:latest
     container_name: redis-exporter
     environment:
       - REDIS_ADDR=redis://redis:6379
-      - REDIS_PASSWORD=7aStgp6OCwAHTNXBp1MGRxh0XgXFjoFcQZDSeVG5KKs=  # <-- Add your Redis password here
+      - REDIS_PASSWORD=${ROOT_PASSWORD}
     restart: unless-stopped
 
+  # MongoDB metrics exporter
   mongodb-exporter:
     image: percona/mongodb_exporter:0.49
     container_name: mongodb-exporter
@@ -89,15 +98,15 @@ services:
       - '--compatible-mode'
       - '--collect-all'
     environment:
-      - MONGODB_URI=mongodb://root:7aStgp6OCwAHTNXBp1MGRxh0XgXFjoFcQZDSeVG5KKs=@mongodb:27017
+      - MONGODB_URI=mongodb://root:${ROOT_PASSWORD}@mongodb:27017
     restart: unless-stopped
 
+  # MariaDB/MySQL metrics exporter
   mariadb-exporter:
     image: prom/mysqld-exporter:latest
     container_name: mariadb-exporter
     environment:
-      # Pass the password securely through the newly required environment format
-      - MYSQLD_EXPORTER_PASSWORD=7aStgp6OCwAHTNXBp1MGRxh0XgXFjoFcQZDSeVG5KKs=
+      - MYSQLD_EXPORTER_PASSWORD=${ROOT_PASSWORD}
     command:
       - '--mysqld.address=mariadb:3306'
       - '--mysqld.username=root'
@@ -105,6 +114,6 @@ services:
 
 
 volumes:
+  # Persistent storage for Prometheus metrics
   prometheus_data:
-  grafana_data:
   

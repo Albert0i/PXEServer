@@ -94,7 +94,7 @@ Grafana makes monitoring accessible. Instead of memorizing PromQL queries, you c
   grafana:
     image: grafana/grafana-oss:latest
     container_name: grafana
-    user: "472"   # safer than root ("0")
+    user: "0"   # safer if use "472"... but won't work!
     restart: unless-stopped
     ports:
       - "80:3000"
@@ -103,7 +103,7 @@ Grafana makes monitoring accessible. Instead of memorizing PromQL queries, you c
 ```
 - Runs on port `80`, mapped to Grafana’s internal port `3000`.
 - Stores dashboards in an external folder (`${DATA_DIR}/grafana_data`).
-- Runs as user `472` (Grafana’s internal user), avoiding root.
+- Runs as user `472` (Grafana’s internal user), avoiding root... but won't work! 
 
 
 #### IV. Redis Exporter: Monitoring the Cache
