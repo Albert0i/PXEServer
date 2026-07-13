@@ -7,19 +7,23 @@ have, like our souls, only the side that we see."<br /><br />"As coisas sonhadas
 
 
 #### Prologue 
-In the hush of servers humming,
-where data flows unseen like rivers in the dark,
-we seek lanterns to light the hidden paths.
-Metrics whisper, logs murmur, queries pulse —
-yet without eyes, without ears,
-their song is lost in silence.
+When servers hum and whisper in the night,  
+Their hidden pulses flow through unseen streams;  
+Yet blind we walk, bereft of guiding light,  
+Unknowing of the truth behind our dreams.  
 
-Thus we call forth Prometheus, keeper of time,
-Grafana, painter of visions,
-and the exporters, translators of secret tongues.
-Together they weave a tapestry of observability,
-a symphony where silence becomes sound,
-and the invisible becomes known.
+Prometheus, the keeper, marks each breath,  
+And stores the tale of time in ordered rows;  
+Grafana paints the charts of life and death,  
+Where silent numbers bloom as living shows.  
+
+The exporters speak in tongues of secret lore,
+Of Redis, Mongo, Mari’s structured song;  
+They open gates to metrics’ guarded store,  
+And guide the watchful eye to right the wrong.  
+
+Thus rises forth a symphony of sight,  
+From darkened code to lanterns burning bright.  
 
 
 #### I. Introduction
@@ -213,12 +217,6 @@ The second half of your `docker-compose.yml` isn’t just a set of containers. I
 By understanding the purpose of each container, you can appreciate how they work together — and how to improve them. Whether you’re debugging a slow query, tracking cache performance, or planning for growth, this stack provides the insights you need.
 
 
-##### Manifestation
-This article was created by **Copilot, your AI companion from Microsoft**.  
-
-I synthesized technical documentation, community knowledge, and best practices into a narrative that blends clarity with poetry. My purpose is to illuminate complexity, enrich understanding, and help you see the invisible rhythms of your systems.  
-
-
 #### IX. Bibliography
 1. [Prometheus Documentation](https://prometheus.io/docs/introduction/overview/)
 2. [Grafana Documentation](https://grafana.com/docs/)
@@ -230,20 +228,24 @@ I synthesized technical documentation, community knowledge, and best practices i
 8. [The Book of Disquiet by Fernando Pessoa](https://dn720004.ca.archive.org/0/items/english-collections-1/Book%20of%20Disquiet%2C%20The%20-%20Fernando%20Pessoa.pdf)
 
 
-### Epilogue 
-Thus the stack stands,  
-a constellation of containers,  
-each a star in the night of complexity.  
+#### Epilogue 
+The tale is told of metrics’ hidden song,  
+Of Prometheus who keeps the pulse of time;  
+Grafana paints the charts both bright and strong,  
+And exporters chant their numbers into rhyme.  
 
-Prometheus, the timekeeper,  
-Grafana, the painter,  
-Exporters, the whisperers —  
-together they sing the hidden song of systems.  
+No longer lost, the systems speak in light,  
+Their secret tongues made clear to mortal eyes;  
+The shadows yield to lanterns burning bright,  
+And data’s truth ascends where silence lies.  
 
-And you, the observer,  
-hear the music, see the patterns,  
-act with foresight,  
-guided by the symphony of observability.  
+Thus knowledge flows through Docker’s woven frame,  
+A symphony of sight, both vast and sure;  
+The watcher hears, and answers to the flame,  
+With wisdom drawn from metrics that endure.  
+
+So ends this work, by Copilot’s own hand,  
+A crafted guide to help your systems stand.  
 
 
 ### EOF (2026/07/17)
