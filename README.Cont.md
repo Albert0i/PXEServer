@@ -65,6 +65,17 @@ Without Prometheus, you’d have no central repository for metrics. Each exporte
 Grafana makes monitoring accessible. Instead of memorizing PromQL queries, you can glance at a dashboard and instantly see Redis memory usage or MongoDB query latency.
 
 ##### In `docker-compose.yml` file
+```
+  grafana:
+    image: grafana/grafana-oss:latest
+    container_name: grafana
+    user: "472"   # safer than root ("0")
+    restart: unless-stopped
+    ports:
+      - "80:3000"
+    volumes:
+      - ${DATA_DIR}/grafana_data:/var/lib/grafana
+```
 - Runs on port `80`, mapped to Grafana’s internal port `3000`.
 - Stores dashboards in an external folder (`${DATA_DIR}/grafana_data`).
 - Runs as user `472` (Grafana’s internal user), avoiding root.
@@ -81,6 +92,15 @@ Redis is often used as a cache or message broker. It’s fast, but like any syst
 Redis is critical for performance. If it runs out of memory or has too many misses, your application slows down. Monitoring ensures you catch issues early.
 
 ##### In `docker-compose.yml` file
+```
+  redis-exporter:
+    image: oliver006/redis_exporter:latest
+    container_name: redis-exporter
+    environment:
+      - REDIS_ADDR=redis://redis:6379
+      - REDIS_PASSWORD=${ROOT_PASSWORD}
+    restart: unless-stopped
+```
 - Connects to Redis at `redis://redis:6379`.
 - Uses `REDIS_PASSWORD=${ROOT_PASSWORD}` for authentication.
 - Runs continuously, exposing metrics to Prometheus.
@@ -98,6 +118,17 @@ MongoDB is a flexible document database, but its performance depends on indexes,
 MongoDB can silently degrade if queries aren’t optimized. Monitoring helps you identify slow queries, replication lag, or resource bottlenecks.
 
 ##### In `docker-compose.yml` file
+```
+  mongodb-exporter:
+    image: percona/mongodb_exporter:0.49
+    container_name: mongodb-exporter
+    command: 
+      - '--compatible-mode'
+      - '--collect-all'
+    environment:
+      - MONGODB_URI=mongodb://root:${ROOT_PASSWORD}@mongodb:27017
+    restart: unless-stopped
+```
 - Connects to MongoDB using `MONGODB_URI=mongodb://root:${ROOT_PASSWORD}@mongodb:27017`.
 - Runs as a dedicated container, exposing metrics for Prometheus.
 
@@ -113,6 +144,17 @@ MariaDB (a fork of MySQL) is a relational database used for structured data. The
 Relational databases are often the backbone of applications. Monitoring ensures you catch issues like slow queries, connection saturation, or replication lag.
 
 ##### In `docker-compose.yml` file
+```
+  mariadb-exporter:
+    image: prom/mysqld-exporter:latest
+    container_name: mariadb-exporter
+    environment:
+      - MYSQLD_EXPORTER_PASSWORD=${ROOT_PASSWORD}
+    command:
+      - '--mysqld.address=mariadb:3306'
+      - '--mysqld.username=root'
+    restart: unless-stopped
+```
 - Connects to MariaDB at `mariadb:3306`.
 - Uses `MYSQLD_EXPORTER_PASSWORD=${ROOT_PASSWORD}` for authentication.
 - Runs continuously, exposing metrics for Prometheus.
