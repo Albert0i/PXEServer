@@ -248,6 +248,7 @@ With wisdom drawn from metrics that endure.
 So ends this work, by Copilot’s own hand,  
 A crafted guide to help your systems stand.  
 
+
 *Footnote:* *Prologue and Epilogue are written in Shakespearean sonnet form (14 lines, ABAB CDCD EFEF GG rhyme scheme), closing the article with poetic symmetry and a resolving couplet.*  
 
 
