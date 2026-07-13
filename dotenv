@@ -12,5 +12,10 @@ DATA_DIR=./data
 CONFIG_DIR=./conf
 
 #
+# Root Password
+#
+ROOT_PASSWORD=7aStgp6OCwAHTNXBp1MGRxh0XgXFjoFcQZDSeVG5KKs=
+
+#
 # EOF (2026/07/04)
 #
