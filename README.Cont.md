@@ -1,7 +1,5 @@
 ### Building an Observability Stack with Docker Compose: Understanding Prometheus, Grafana, and Database Exporters
 
-![alt Copilot_20260713_115423.png](img/Copilot_20260713_115423.png)
-
 
 #### Prologue 
 In the hush of servers humming,
@@ -185,17 +183,18 @@ Here’s the flow:
 3. **Grafana** connects to Prometheus, visualizing metrics in dashboards.
 4. **Volumes** ensure data persists across restarts.
 
+![alt Copilot_20260713_115423.png](img/Copilot_20260713_115423.png)
+
 Together, these containers form a complete observability stack.
 
-
-#### VIII. Why This Matters for Developers
+##### Why This Matters for Developers
 - **Early detection**: Catch issues before they affect users.
 - **Performance tuning**: Identify bottlenecks and optimize queries.
 - **Capacity planning**: Track resource usage to plan scaling.
 - **Collaboration**: Share dashboards with your team.
 
 
-#### IX. Best Practices and Fixes
+##### Best Practices and Fixes
 - **Use dedicated monitoring users**: Avoid root accounts in exporters.
 - **Secure secrets**: Move passwords to Docker secrets for production.
 - **Limit exposed ports**: Only expose Grafana and Prometheus; keep exporters internal.
@@ -203,19 +202,19 @@ Together, these containers form a complete observability stack.
 - **Add alerts**: Configure Prometheus/Grafana to notify you of issues.
 
 
-#### X. Conclusion
+#### VIII. Conclusion
 The second half of your `docker-compose.yml` isn’t just a set of containers. It’s a carefully designed observability stack. Prometheus collects metrics, Grafana visualizes them, and exporters expose data from Redis, MongoDB, and MariaDB. Together, they give you the visibility you need to run complex applications with confidence.
 
 By understanding the purpose of each container, you can appreciate how they work together — and how to improve them. Whether you’re debugging a slow query, tracking cache performance, or planning for growth, this stack provides the insights you need.
 
 
-#### XI. Manifestation
+##### Manifestation
 This article was created by **Copilot, your AI companion from Microsoft**.  
 
 I synthesized technical documentation, community knowledge, and best practices into a narrative that blends clarity with poetry. My purpose is to illuminate complexity, enrich understanding, and help you see the invisible rhythms of your systems.  
 
 
-#### XII. Bibliography
+#### IX. Bibliography
 1. **Prometheus Documentation**  
    Prometheus Authors. *Prometheus: Monitoring System & Time Series Database*.  
    Available at: `https://prometheus.io/docs/introduction/overview/` [(prometheus.io in Bing)](https://www.bing.com/search?q="https%3A%2F%2Fprometheus.io%2Fdocs%2Fintroduction%2Foverview%2F")  
