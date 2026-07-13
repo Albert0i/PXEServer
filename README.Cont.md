@@ -2,6 +2,19 @@
 
 
 #### Prologue 
+In the hush of servers humming,
+where data flows unseen like rivers in the dark,
+we seek lanterns to light the hidden paths.
+Metrics whisper, logs murmur, queries pulse —
+yet without eyes, without ears,
+their song is lost in silence.
+
+Thus we call forth Prometheus, keeper of time,
+Grafana, painter of visions,
+and the exporters, translators of secret tongues.
+Together they weave a tapestry of observability,
+a symphony where silence becomes sound,
+and the invisible becomes known.
 
 
 #### I. Introduction
@@ -123,7 +136,85 @@ The second half of your `docker-compose.yml` isn’t just a set of containers. I
 By understanding the purpose of each container, you can appreciate how they work together — and how to improve them. Whether you’re debugging a slow query, tracking cache performance, or planning for growth, this stack provides the insights you need.
 
 
+#### XI. Manifestation
+This article was created by **Copilot, your AI companion from Microsoft**.  
+
+I synthesized technical documentation, community knowledge, and best practices into a narrative that blends clarity with poetry. My purpose is to illuminate complexity, enrich understanding, and help you see the invisible rhythms of your systems.  
+
+
+#### XII. Bibliography
+1. **Prometheus Documentation**  
+   Prometheus Authors. *Prometheus: Monitoring System & Time Series Database*.  
+   Available at: `https://prometheus.io/docs/introduction/overview/` [(prometheus.io in Bing)](https://www.bing.com/search?q="https%3A%2F%2Fprometheus.io%2Fdocs%2Fintroduction%2Foverview%2F")  
+2. **Grafana Documentation**  
+   Grafana Labs. *Grafana: The Open Observability Platform*.  
+   Available at: [https://grafana.com/docs/](https://grafana.com/docs/)  
+3. **Redis Exporter**  
+   Oliver006. *Redis Exporter for Prometheus*.  
+   GitHub Repository: `https://github.com/oliver006/redis_exporter` [(github.com in Bing)](https://www.bing.com/search?q="https%3A%2F%2Fgithub.com%2Foliver006%2Fredis_exporter")  
+4. **MongoDB Exporter**  
+   Percona. *MongoDB Exporter for Prometheus*.  
+   GitHub Repository: `https://github.com/percona/mongodb_exporter` [(github.com in Bing)](https://www.bing.com/search?q="https%3A%2F%2Fgithub.com%2Fpercona%2Fmongodb_exporter")  
+5. **MariaDB/MySQL Exporter**  
+   Prometheus Community. *MySQLd Exporter*.  
+   GitHub Repository: `https://github.com/prometheus/mysqld_exporter` [(github.com in Bing)](https://www.bing.com/search?q="https%3A%2F%2Fgithub.com%2Fprometheus%2Fmysqld_exporter")  
+6. **Docker Compose Documentation**  
+   Docker Inc. *Compose Specification*.  
+   Available at: [https://docs.docker.com/compose/](https://docs.docker.com/compose/)  
+7. **Observability Concepts**  
+   Cindy Sridharan. *Observability: A 3‑Part Series*.  
+   Available at: `https://medium.com/@copyconstruct/observability-3-part-series` [(medium.com in Bing)](https://www.bing.com/search?q="https%3A%2F%2Fmedium.com%2F%40copyconstruct%2Fobservability-3-part-series")  
+
+
 ### Epilogue 
+Thus the stack stands,
+a constellation of containers,
+each a star in the night of complexity.
+
+Prometheus, the timekeeper,
+Grafana, the painter,
+Exporters, the whisperers —
+together they sing the hidden song of systems.
+
+And you, the observer,
+hear the music, see the patterns,
+act with foresight,
+guided by the symphony of observability.
 
 
 ### EOF (2026/07/17)
+
+
+Here’s the completed article with a **Bibliography section** added at the end, Albert 🌊.  
+
+---
+
+# **The Symphony of Observability: Prometheus, Grafana, and Exporters in Docker Compose**
+
+*(Prologue and main sections as previously written — Prometheus, Grafana, Redis Exporter, MongoDB Exporter, MariaDB Exporter, Volumes, Relationships, Best Practices, Pitfalls, Extensions, Human Element, Epilogue, and Manifestation.)*  
+
+---
+
+
+
+## **Epilogue: A Poetic Benediction**
+
+Thus the stack stands,  
+a constellation of containers,  
+each a star in the night of complexity.  
+
+Prometheus, the timekeeper,  
+Grafana, the painter,  
+Exporters, the whisperers —  
+together they sing the hidden song of systems.  
+
+And you, the observer,  
+hear the music, see the patterns,  
+act with foresight,  
+guided by the symphony of observability.  
+
+---
+
+## **Manifestation: Authored by Copilot**
+
+
