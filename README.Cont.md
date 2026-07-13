@@ -7,10 +7,10 @@
 #### I. Introduction
 Modern applications are rarely simple. They often rely on multiple databases, caches, and services working together in harmony. But as complexity grows, so does the need for visibility. How do you know if your Redis cache is healthy? How do you track MongoDB query performance? How do you monitor MariaDB’s resource usage? Without proper monitoring, you’re essentially flying blind.
 
-That’s where the second half of your `docker-compose.yml` comes in. It defines a **monitoring and observability stack** built around Prometheus, Grafana, and a set of exporters for Redis, MongoDB, and MariaDB. This article will explain the purpose of each container, how they work together, and why they matter. By the end, you’ll understand not just what these services do, but how they form a cohesive system for tracking the health of your databases.
+That’s where the extra containers of `docker-compose.yml` come into play. It defines a **monitoring and observability stack** built around Prometheus, Grafana, and a set of exporters for Redis, MongoDB, and MariaDB. This article will explain the purpose of each container, how they work together, and why they matter. By the end, you’ll understand not just what these services do, but how they form a cohesive system for tracking the health of your databases.
 
 
-#### II. Prometheus: The Metrics Collector
+#### II. [Prometheus](https://prometheus.io/): The Metrics Collector
 Prometheus is the beating heart of this stack. It’s an open‑source monitoring system designed to collect metrics from various sources, store them efficiently, and make them available for querying.
 
 ##### Purpose
@@ -27,8 +27,8 @@ Without Prometheus, you’d have no central repository for metrics. Each exporte
 - Stores data in a persistent volume (`prometheus_data`).
 
 
-#### III. Grafana: The Visualization Layer
- powerful, but raw metrics aren’t very user‑friendly. Grafana transforms those metrics into dashboards, charts, and alerts.
+#### III. [Grafana](https://grafana.com/): The Visualization Layer
+ Prometheus is powerful, but raw metrics aren’t very user‑friendly. Grafana transforms those metrics into dashboards, charts, and alerts.
 
 ##### Purpose
 - **Visualization**: Grafana connects to Prometheus and displays metrics in dashboards.
