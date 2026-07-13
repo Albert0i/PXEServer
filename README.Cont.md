@@ -211,13 +211,14 @@ Together, these containers form a complete observability stack.
 - **Add alerts**: Configure Prometheus/Grafana to notify you of issues.
 
 
-#### VIII. Conclusion
+##### Conclusion
+
 The second half of your `docker-compose.yml` isn’t just a set of containers. It’s a carefully designed observability stack. Prometheus collects metrics, Grafana visualizes them, and exporters expose data from Redis, MongoDB, and MariaDB. Together, they give you the visibility you need to run complex applications with confidence.
 
 By understanding the purpose of each container, you can appreciate how they work together — and how to improve them. Whether you’re debugging a slow query, tracking cache performance, or planning for growth, this stack provides the insights you need.
 
 
-#### IX. Bibliography
+#### VIII. Bibliography
 1. [Prometheus Documentation](https://prometheus.io/docs/introduction/overview/)
 2. [Grafana Documentation](https://grafana.com/docs/)
 3. [Redis Exporter](https://github.com/oliver006/redis_exporter)
