@@ -52,6 +52,24 @@ Without Prometheus, you’d have no central repository for metrics. Each exporte
 - Mounts `prometheus.yml` for configuration, which defines scrape targets (like Redis exporter).
 - Stores data in a persistent volume (`prometheus_data`).
 
+In `prometheus.yml` file: 
+```
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['redis-exporter:9121']
+
+  - job_name: 'mongodb'
+    static_configs:
+      - targets: ['mongodb-exporter:9216']
+
+  - job_name: 'mariadb'
+    static_configs:
+      - targets: ['mariadb-exporter:9104']
+```
 
 #### III. [Grafana](https://grafana.com/): The Visualization Layer
  Prometheus is powerful, but raw metrics aren’t very user‑friendly. Grafana transforms those metrics into dashboards, charts, and alerts.
