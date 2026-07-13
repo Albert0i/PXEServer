@@ -1,5 +1,10 @@
 ### Building an Observability Stack with Docker Compose: Understanding Prometheus, Grafana, and Database Exporters
 
+> "The things we dream have just one side. We can’t walk around them
+to see what’s on the other side. The problem with the things of life
+is that we can look at them from all sides. The things we dream
+have, like our souls, only the side that we see."<br /><br />"As coisas sonhadas só têm o lado de cá... Não se lhes pode ver o outro lado... Não se pode andar à roda delas... O mal das coisas da vida é que as podemos ir olhando por todos os lados... As coisas de sonho só têm o lado que vemos... Têm amores só puros, como as nossas almas’."<br/>--- The Book of Disquiet by Fernando Pessoa
+
 
 #### Prologue 
 In the hush of servers humming,
@@ -215,27 +220,14 @@ I synthesized technical documentation, community knowledge, and best practices i
 
 
 #### IX. Bibliography
-1. **Prometheus Documentation**  
-   Prometheus Authors. *Prometheus: Monitoring System & Time Series Database*.  
-   Available at: `https://prometheus.io/docs/introduction/overview/` [(prometheus.io in Bing)](https://www.bing.com/search?q="https%3A%2F%2Fprometheus.io%2Fdocs%2Fintroduction%2Foverview%2F")  
-2. **Grafana Documentation**  
-   Grafana Labs. *Grafana: The Open Observability Platform*.  
-   Available at: [https://grafana.com/docs/](https://grafana.com/docs/)  
-3. **Redis Exporter**  
-   Oliver006. *Redis Exporter for Prometheus*.  
-   GitHub Repository: `https://github.com/oliver006/redis_exporter` [(github.com in Bing)](https://www.bing.com/search?q="https%3A%2F%2Fgithub.com%2Foliver006%2Fredis_exporter")  
-4. **MongoDB Exporter**  
-   Percona. *MongoDB Exporter for Prometheus*.  
-   GitHub Repository: `https://github.com/percona/mongodb_exporter` [(github.com in Bing)](https://www.bing.com/search?q="https%3A%2F%2Fgithub.com%2Fpercona%2Fmongodb_exporter")  
-5. **MariaDB/MySQL Exporter**  
-   Prometheus Community. *MySQLd Exporter*.  
-   GitHub Repository: `https://github.com/prometheus/mysqld_exporter` [(github.com in Bing)](https://www.bing.com/search?q="https%3A%2F%2Fgithub.com%2Fprometheus%2Fmysqld_exporter")  
-6. **Docker Compose Documentation**  
-   Docker Inc. *Compose Specification*.  
-   Available at: [https://docs.docker.com/compose/](https://docs.docker.com/compose/)  
-7. **Observability Concepts**  
-   Cindy Sridharan. *Observability: A 3‑Part Series*.  
-   Available at: `https://medium.com/@copyconstruct/observability-3-part-series` [(medium.com in Bing)](https://www.bing.com/search?q="https%3A%2F%2Fmedium.com%2F%40copyconstruct%2Fobservability-3-part-series")  
+1. [Prometheus Documentation](https://prometheus.io/docs/introduction/overview/)
+2. [Grafana Documentation](https://grafana.com/docs/)
+3. [Redis Exporter](https://github.com/oliver006/redis_exporter)
+4. [MongoDB Exporter](https://github.com/percona/mongodb_exporter)
+5. [MariaDB/MySQL Exporter](https://github.com/prometheus/mysqld_exporter)
+6. [Docker Compose Documentation](https://docs.docker.com/compose/)
+7. [Understanding Observability](https://medium.com/@anupama.pathirage/understanding-observability-6aa5194a3041)
+8. [The Book of Disquiet by Fernando Pessoa](https://dn720004.ca.archive.org/0/items/english-collections-1/Book%20of%20Disquiet%2C%20The%20-%20Fernando%20Pessoa.pdf)
 
 
 ### Epilogue 
