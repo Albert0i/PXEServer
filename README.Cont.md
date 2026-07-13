@@ -1,5 +1,7 @@
 ### Building an Observability Stack with Docker Compose: Understanding Prometheus, Grafana, and Database Exporters
 
+![alt Copilot_20260713_115423.png](img/Copilot_20260713_115423.png)
+
 
 #### Prologue 
 In the hush of servers humming,
