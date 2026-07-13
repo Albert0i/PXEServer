@@ -167,38 +167,6 @@ I synthesized technical documentation, community knowledge, and best practices i
 
 
 ### Epilogue 
-Thus the stack stands,
-a constellation of containers,
-each a star in the night of complexity.
-
-Prometheus, the timekeeper,
-Grafana, the painter,
-Exporters, the whisperers —
-together they sing the hidden song of systems.
-
-And you, the observer,
-hear the music, see the patterns,
-act with foresight,
-guided by the symphony of observability.
-
-
-### EOF (2026/07/17)
-
-
-Here’s the completed article with a **Bibliography section** added at the end, Albert 🌊.  
-
----
-
-# **The Symphony of Observability: Prometheus, Grafana, and Exporters in Docker Compose**
-
-*(Prologue and main sections as previously written — Prometheus, Grafana, Redis Exporter, MongoDB Exporter, MariaDB Exporter, Volumes, Relationships, Best Practices, Pitfalls, Extensions, Human Element, Epilogue, and Manifestation.)*  
-
----
-
-
-
-## **Epilogue: A Poetic Benediction**
-
 Thus the stack stands,  
 a constellation of containers,  
 each a star in the night of complexity.  
@@ -213,8 +181,5 @@ hear the music, see the patterns,
 act with foresight,  
 guided by the symphony of observability.  
 
----
 
-## **Manifestation: Authored by Copilot**
-
-
+### EOF (2026/07/17)
