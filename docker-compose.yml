@@ -21,13 +21,13 @@ services:
   mariadb:
     image: ${MARIADB_IMAGE}
     container_name: mariadb
+    ports:
+      - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: ${ROOT_PASSWORD}
       MYSQL_DATABASE: mydb
       MYSQL_USER: myuser
       MYSQL_PASSWORD: mypassword
-    ports:
-      - "3306:3306"
     volumes:
       - ${DATA_DIR}/mariadb:/var/lib/mysql:rw
     restart: unless-stopped
@@ -50,33 +50,38 @@ services:
 #    Monitoring Containers    #
 ###############################
   # Prometheus metrics collector
+  # Before starting, create the folder and set permissions:
+  #   mkdir -p ./data/prometheus_data
+  #   sudo chown -R 65534:65534 /data/prometheus_data
+  # Prometheus often runs as UID 65534 (nobody).  
   prometheus:
     image: prom/prometheus:latest
     container_name: prometheus
-    restart: unless-stopped
-    volumes:
-      - prometheus_data:/prometheus
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
     ports:
       - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ${DATA_DIR}/prometheus_data:/prometheus
+    restart: unless-stopped
   #
   # http://localhost:9090/targets
   #      
 
   # Grafana visualization dashboard
-  # Note: 
-  # Create a local data folder to persist Grafana data!
-  # mkdir -p ./data/grafana_data
-  # sudo chown -R 777 ./data/grafana_data
+  # Before starting, create the folder and set permissions:
+  #   mkdir -p ./data/grafana_data
+  #   sudo chown -R 472:472 ./data/grafana_data
+  # Grafana runs inside the container as user ID 472.
+  # Setting ownership ensures the container can read/write safely.
   grafana:
     image: grafana/grafana-oss:latest
     container_name: grafana
-    user: "0"   # safer if use "472"... but won't work!
-    restart: unless-stopped
+    user: "472"   # safer then "0" which is root.    
     ports:
       - "80:3000"
     volumes:
       - ${DATA_DIR}/grafana_data:/var/lib/grafana
+    restart: unless-stopped
   #
   # http://localhost:80/
   #
@@ -105,15 +110,47 @@ services:
   mariadb-exporter:
     image: prom/mysqld-exporter:latest
     container_name: mariadb-exporter
-    environment:
-      - MYSQLD_EXPORTER_PASSWORD=${ROOT_PASSWORD}
     command:
       - '--mysqld.address=mariadb:3306'
       - '--mysqld.username=root'
+    environment:
+      - MYSQLD_EXPORTER_PASSWORD=${ROOT_PASSWORD}      
     restart: unless-stopped
 
 
-volumes:
-  # Persistent storage for Prometheus metrics
-  prometheus_data:
-  
+##############################################
+# Notes for Persistence and Security
+##############################################
+
+# 1. External mapped folders are used instead of named volumes.
+#    This makes data transparent, easy to back up, and portable.
+#    The bottom-level "volumes:" section can be removed entirely.
+# 2. Always create the data folders before starting containers.
+#    Use ${DATA_DIR} for flexibility. Example:
+#      mkdir -p ${DATA_DIR}/redis
+#      mkdir -p ${DATA_DIR}/mariadb
+#      mkdir -p ${DATA_DIR}/mongodb
+#      mkdir -p ${DATA_DIR}/prometheus_data
+#      mkdir -p ${DATA_DIR}/grafana_data
+# 3. Set correct ownership for each folder to match the container’s internal user:
+#    Redis (UID 999):
+#      sudo chown -R 999:999 ${DATA_DIR}/redis
+#    MariaDB (UID 999):
+#      sudo chown -R 999:999 ${DATA_DIR}/mariadb
+#    MongoDB (UID 999):
+#      sudo chown -R 999:999 ${DATA_DIR}/mongodb
+#    Prometheus (UID 65534, "nobody"):
+#      sudo chown -R 65534:65534 ${DATA_DIR}/prometheus_data
+#    Grafana (UID 472):
+#      sudo chown -R 472:472 ${DATA_DIR}/grafana_data
+# 4. Pin image versions instead of using "latest" for stability.
+#    Example:
+#      image: grafana/grafana-oss:11.2.0
+#      image: prom/prometheus:v2.53.0
+#      image: mariadb:11.4.2
+#      image: mongo:7.0.12
+#      image: redis:7.2.5
+# 5. Keep sensitive values (like ROOT_PASSWORD) in your .env file.
+#    This keeps your Compose file clean and avoids leaking secrets.
+# 6. Exporter containers (redis-exporter, mongodb-exporter, mariadb-exporter)
+#    do not need persistent storage. They only expose metrics.
