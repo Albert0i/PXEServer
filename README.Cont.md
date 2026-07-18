@@ -94,7 +94,7 @@ Grafana makes monitoring accessible. Instead of memorizing PromQL queries, you c
   grafana:
     image: grafana/grafana-oss:latest
     container_name: grafana
-    user: "0"   # safer if use "472"... but won't work!
+    user: "472"   # safer then "0" which is root. 
     restart: unless-stopped
     ports:
       - "80:3000"

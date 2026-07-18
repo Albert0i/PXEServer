@@ -88,6 +88,10 @@ services:
   # username:admin
   # password:admin
   # 
+  # open port 80 and 9090 to external access (if necessary)
+  # sudo ufw allow 80
+  # sudo ufw allow 9090
+  # 
 
   # Redis metrics exporter
   redis-exporter:
