@@ -74,7 +74,7 @@ services:
   # Grafana runs inside the container as user ID 472.
   # Setting ownership ensures the container can read/write safely.
   grafana:
-    image: grafana/grafana-oss:latest
+    image: grafana/grafana:latest
     container_name: grafana
     user: "472"   # safer then "0" which is root.    
     ports:
