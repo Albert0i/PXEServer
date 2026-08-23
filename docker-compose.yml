@@ -62,6 +62,10 @@ services:
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
       - ${DATA_DIR}/prometheus_data:/prometheus
+    depends_on:
+      - redis-exporter
+      - mariadb-exporter
+      - mongodb-exporter    
     restart: unless-stopped
   #
   # http://localhost:9090/targets
@@ -81,6 +85,8 @@ services:
       - "80:3000"
     volumes:
       - ${DATA_DIR}/grafana_data:/var/lib/grafana
+    depends_on:
+      - prometheus
     restart: unless-stopped
   #
   # http://localhost:80/
@@ -100,6 +106,8 @@ services:
     environment:
       - REDIS_ADDR=redis://redis:6379
       - REDIS_PASSWORD=${ROOT_PASSWORD}
+    depends_on:
+      - redis  
     restart: unless-stopped
 
   # MongoDB metrics exporter
@@ -111,6 +119,8 @@ services:
       - '--collect-all'
     environment:
       - MONGODB_URI=mongodb://root:${ROOT_PASSWORD}@mongodb:27017
+    depends_on:
+      - mongodb         
     restart: unless-stopped
 
   # MariaDB/MySQL metrics exporter
@@ -121,7 +131,9 @@ services:
       - '--mysqld.address=mariadb:3306'
       - '--mysqld.username=root'
     environment:
-      - MYSQLD_EXPORTER_PASSWORD=${ROOT_PASSWORD}      
+      - MYSQLD_EXPORTER_PASSWORD=${ROOT_PASSWORD} 
+    depends_on:
+      - mariadb      
     restart: unless-stopped
 
 
@@ -178,6 +190,8 @@ services:
       # LINUX FIX: If the app crashes with a write-permission block on Linux, run:
       # sudo mkdir -p ./data/dbeaver_data && sudo chown -R 1001:1001 ./data/dbeaver_data
       - ./data/dbeaver_data:/opt/cloudbeaver/workspace
+    depends_on:
+      - mariadb  
     restart: always
 
   # MongoDB Compass
@@ -192,6 +206,8 @@ services:
         - CW_MONGO_URI=mongodb://root:${ROOT_PASSWORD}@mongodb:27017/ 
       volumes:
         - ./data/compass_data:/home/node/.config/MongoDB\ Compass
+      depends_on:
+        - mongodb            
       restart: always
 
   # RedisInsight
@@ -206,5 +222,6 @@ services:
       # LINUX FIX: If RedisInsight crashes on Linux due to folder locks, run:
       # sudo mkdir -p ./data/redisinsight_data && sudo chown -R 1000:1000 ./data/redisinsight_data
       - ./data/redisinsight_data:/data
+    depends_on:
+      - redis  
     restart: always
-
