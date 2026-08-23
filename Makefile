@@ -57,19 +57,6 @@ ps:
 logs:
 	$(COMPOSE) logs -f
 
-# prune:
-# 	@echo "Clearing logs..."
-# 	@rm -f $(DATA_DIR)/redis/*.log || true
-# 	@rm -f $(DATA_DIR)/mariadb/*.log || true
-# 	@rm -f $(DATA_DIR)/mongodb/*.log || true
-# 	@echo "Resetting web client persistence data directories..."
-# 	@sudo rm -rf ./data/dbeaver_data ./data/compass_data ./data/redisinsight_data
-# 	@echo "Recreating folders and enforcing correct user ownership restrictions..."
-# 	@mkdir -p ./data/dbeaver_data ./data/compass_data ./data/redisinsight_data
-# 	@sudo chown -R 1001:1001 ./data/dbeaver_data
-# 	@sudo chown -R 1000:1000 ./data/compass_data
-# 	@sudo chown -R 1000:1000 ./data/redisinsight_data
-# 	@echo "✅ Client folders reset successfully with matching Linux permissions!"
 prune:
 	@echo "⚠️ Completely removing the entire data folder and all subfolders..."
 	@sudo rm -rf ./data
