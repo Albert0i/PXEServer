@@ -43,6 +43,12 @@ up:
 	@echo "│    👉 DB Host:    redis                                                │"
 	@echo "│    👉 DB Port:    6379                                                 │"
 	@echo "│                                                                        │"
+	@echo "│ 🌐 4. Grafana Dashboards                                               │"
+	@echo "│    👉 URL:        http://localhost/dashboards                          │"
+	@echo "│                                                                        │"
+	@echo "│ 🌐 5. Prometheus Backend                                               │"
+	@echo "│    👉 URL:        http://localhost:9090/targets                        │"
+	@echo "│                                                                        │"		
 	@echo "└────────────────────────────────────────────────────────────────────────┘"
 
 down:
