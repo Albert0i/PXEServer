@@ -73,21 +73,24 @@ logs:
 prune:
 	@echo "⚠️ Completely removing the entire data folder and all subfolders..."
 	@sudo rm -rf ./data
-	@echo "📁 Recreating the root data directory and all database/client subfolders..."
+	@echo "📁 Recreating the root data directory and all subfolders..."
 	@sudo mkdir -p ./data
 	@sudo mkdir -p ./data/mariadb ./data/mongodb ./data/redis
 	@sudo mkdir -p ./data/dbeaver_data ./data/compass_data ./data/redisinsight_data
-	@echo "🔒 Setting permissions and ownership layers..."
-	@# 1. Enforce root:root ownership on the main data folder itself
+	@sudo mkdir -p ./data/grafana_data ./data/prometheus_data
+	@echo "🔒 Enforcing precise user ownership matching your system layout..."
+	@# 1. Root folder ownership
 	@sudo chown root:root ./data
 	@sudo chmod 755 ./data
-	@# 2. Match your system layout for databases (dnsmasq:systemd-journal)
-	@sudo chown -R 103:101 ./data/mariadb
-	@sudo chown -R 103:101 ./data/mongodb
-	@sudo chown -R 103:101 ./data/redis
-	@# 3. Match '8978:8978' ownership for CloudBeaver workspace
+	@# 2. Database folders (Using explicit system text names)
+	@sudo chown -R dnsmasq:systemd-journal ./data/mariadb
+	@sudo chown -R dnsmasq:systemd-journal ./data/mongodb
+	@sudo chown -R dnsmasq:systemd-journal ./data/redis
+	@# 3. Monitoring folders (Using explicit system text names / numeric IDs)
+	@sudo chown -R 472:472 ./data/grafana_data
+	@sudo chown -R nobody:nogroup ./data/prometheus_data
+	@# 4. Client interface folders (Using explicit numeric and active host user IDs)
 	@sudo chown -R 8978:8978 ./data/dbeaver_data
-	@# 4. Match your host user account (alberto) for Compass and RedisInsight
 	@sudo chown -R $(shell id -u):$(shell id -g) ./data/compass_data
 	@sudo chown -R $(shell id -u):$(shell id -g) ./data/redisinsight_data
 	@echo "✅ The entire data folder structure has been completely reset and permissioned!"
