@@ -30,6 +30,8 @@ services:
       MYSQL_PASSWORD: mypassword
     volumes:
       - ${DATA_DIR}/mariadb:/var/lib/mysql:rw
+    # ADD THIS LINE BELOW TO FORCE CASE INSENSITIVITY:
+    command: --lower_case_table_names=1
     restart: unless-stopped
 
   # MongoDB document database  
